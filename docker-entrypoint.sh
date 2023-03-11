@@ -78,12 +78,13 @@ echo "Saving stream in \"$dirName\""
 # start recording with ffmpeg
 ffmpeg -rtsp_transport tcp \
     -y \
-    -stimeout 1000000 \
+#    -stimeout 1000000 \
     -i "$streamURL" \
-    -c copy \
+    -b:v 900k
+    -vcodec copy \
     -f segment \
     -segment_time "$VIDEO_SEGMENT_TIME" \
     -segment_atclocktime 1 \
     -strftime 1 \
     "$dir"/%Y-%m-%d_%H-%M-%S."$fileExtension" \
-    -loglevel panic
+    -loglevel info
